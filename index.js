@@ -3,8 +3,10 @@
  */
 
 import {AppRegistry} from 'react-native';
-import HomeScreen from './src/screens/HomeScreen';
-import App from './App';
 import {name as appName} from './app.json';
+import App from './src/screens/App';
+import 'react-native-get-random-values';
 
-AppRegistry.registerComponent(appName, () => HomeScreen);
+import Apple from './src/screens/Apple';
+
+AppRegistry.registerComponent(appName, () => App);
