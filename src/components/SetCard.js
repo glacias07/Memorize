@@ -26,7 +26,7 @@ const SetCard = ({cardOnPress, setName, termCount, style}) => {
         <Image
           style={{height: 70, width: 70}}  
           source={require('../assets/images/profilepic.jpg')} //ADD THUMBNAIl
-        />
+        /> 
       </View>
       <UsernameLabel style={Styles.usernameLabelStyle} />
     </TouchableOpacity>
