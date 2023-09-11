@@ -24,7 +24,7 @@ const SetCard = ({cardOnPress, setName, termCount, style}) => {
           />
         </View>
         <Image
-          style={{height: 70, width: 70}}
+          style={{height: 70, width: 70}} 
           source={require('../assets/images/profilepic.jpg')} //ADD THUMBNAIl
         />
       </View>
