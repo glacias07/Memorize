@@ -1,40 +1,46 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import UsernameLabel from './UsernameLabel';
+import MyText from './MyText';
 
-export default function FolderCard({folderName, style, setCount}) {
+const FolderCard = ({folderOnPress, folderName, style, setCount}) => {
   return (
-    <TouchableOpacity style={[{backgroundColor: '#2e3856'}, style]}>
-      <Text
-        style={{padding: 10, color: 'white', fontSize: 16, fontWeight: 500}}>
-        {setCount} Sets
-      </Text>
+    <TouchableOpacity
+      onPress={folderOnPress}
+      style={[Styles.containerStyle, style]}>
+      <Image
+        tintColor={'white'}
+        style={Styles.iconStyle}
+        source={require('../assets/images/folder.png')}
+      />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        }}>
-        <Icon
-          name="folder-o"
-          size={30}
-          color="#0CC"
-          onPress={() => console.log('onPress()')}
-          style={{padding: 10}}
-        />
-        <Text
-          numberOfLines={3}
-          style={{
-            padding: 10,
-            color: 'white',
-            fontSize: 19,
-            fontWeight: 600,
-            width: '85%',
-          }}>
-          {folderName}
-        </Text>
-      </View>
+      <MyText
+        content={folderName}
+        fontColor="white"
+        fontWeight={900}
+        fontSize={17}
+      />
+      <UsernameLabel style={Styles.usernameLabelStyle} />
     </TouchableOpacity>
   );
-}
+};
+
+export default FolderCard;
+
+const Styles = {
+  containerStyle: {
+    padding: 10,
+    borderWidth: 2.5,
+    borderColor: '#303854',
+    borderRadius: 10,
+    backgroundColor: 'transparent',
+  },
+  iconStyle: {
+    height: 25,
+    width: 25,
+    marginBottom: 10,
+  },
+  usernameLabelStyle: {
+    marginTop: 20,
+  },
+};

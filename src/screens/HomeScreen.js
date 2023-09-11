@@ -9,6 +9,7 @@ import Folder from '../db/FolderSchema';
 
 import Realm from 'realm';
 import {createRealmContext} from '@realm/react';
+import SetCard from '../components/SetCard';
 
 const realmConfig = {
   schema: [Folder],
@@ -43,8 +44,6 @@ const HomeScreenContent = () => {
         style={{margin: 10}}
       /> */}
 
-      {/* <FolderCard folderName={'Let '} setCount={'100'} style={{margin: 10}} /> */}
-
       {/* <FlatList
         style={{backgroundColor: '#0a092d'}}
         data={folders}
@@ -57,7 +56,17 @@ const HomeScreenContent = () => {
         )}
       /> */}
       <View
-        style={{backgroundColor: '#0a092d', flex: 1, justifyContent: 'center'}}>
+        style={{backgroundColor: '#0a092d', flex: 1}}>
+        <SetCard setName={'Set 31'} termCount={30} style={{margin: 10}}/>
+
+        {/* <FolderCard
+          folderName={
+            'Unkwown words encountered'
+          }
+          setCount={'100'}
+          style={{margin: 10}}
+        /> */}
+
         {/* <FlashCard
           word="haha"
           meaning={meaning}
@@ -73,7 +82,7 @@ const HomeScreenContent = () => {
           }
         /> */}
 
-        <FlashCard
+        {/* <FlashCard
           word="haha"
           meaning={meaning}
           cardSize="Full"
@@ -81,8 +90,8 @@ const HomeScreenContent = () => {
             margin: 5,
             alignSelf: 'center',
           }}
-          imageUri={"https://i.gifer.com/XOsX.gif"}
-        />
+          imageUri={'https://i.gifer.com/XOsX.gif'}
+        /> */}
 
         {/* <FlashCard
           word="haha"

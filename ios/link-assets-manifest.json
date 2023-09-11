@@ -1,4 +1,37 @@
 {
   "migIndex": 1,
-  "data": []
+  "data": [
+    {
+      "path": "src/assets/fonts/trakya-sans-100.ttf",
+      "sha1": "7dfa4b9ba53678eb84b0ec768a7cdeb201ec0dcb"
+    },
+    {
+      "path": "src/assets/fonts/trakya-sans-300.ttf",
+      "sha1": "03c43d90460cf37c63bf4e4b1b6f380cecfd72de"
+    },
+    {
+      "path": "src/assets/fonts/trakya-sans-500.ttf",
+      "sha1": "137e6b2255e33430734677adadea512bcf1d9972"
+    },
+    {
+      "path": "src/assets/fonts/trakya-sans-700.ttf",
+      "sha1": "8b2cd00ae5b2cee8ba9b6743d53bc9da06344849"
+    },
+    {
+      "path": "src/assets/fonts/trakya-sans-900.ttf",
+      "sha1": "9c221a0efd8bd968ad040cea159735841dd81eed"
+    },
+    {
+      "path": "src/assets/images/add.png",
+      "sha1": "c416f316eefb9402e9d8d19b479f60f3a8c8c5c9"
+    },
+    {
+      "path": "src/assets/images/folder.png",
+      "sha1": "5f2306721c86c21dabd2b5d80045830d3d5dcfa9"
+    },
+    {
+      "path": "src/assets/images/profilepic.jpg",
+      "sha1": "cdf3160e4d679adec6e9289a4badfc15a9f297ed"
+    }
+  ]
 }

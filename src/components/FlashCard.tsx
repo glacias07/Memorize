@@ -1,12 +1,11 @@
 import {
   View,
-  Text,
   StyleSheet,
   Pressable,
   Image,
   Dimensions,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Animated, {
   interpolate,
@@ -16,8 +15,9 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import FullMeaningModal from './FullMeaningModal';
+import MyText from './MyText';
 
-const FlashCard = ({word, meaning, cardStyle, imageUri, cardSize}: any) => {
+const FlashCard = ({ word, meaning, cardStyle, imageUri, cardSize }: any) => {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const SCREEN_HEIGHT = Dimensions.get('window').height;
   const [aspectRatio, setAspectRatio] = useState(1);
@@ -27,87 +27,92 @@ const FlashCard = ({word, meaning, cardStyle, imageUri, cardSize}: any) => {
     imageUri ? Image.getSize(imageUri, (w, h) => setAspectRatio(w / h)) : null;
   }
 
-  var CARD_HEIGHT = {height: 0};
-  var CARD_WIDTH = {width: 0};
+  var CARD_HEIGHT = { height: 0 };
+  var CARD_WIDTH = { width: 0 };
   if (cardSize == 'Full') {
-    CARD_HEIGHT = {height: SCREEN_HEIGHT * 0.85};
-    CARD_WIDTH = {width: SCREEN_WIDTH * 0.9};
+    CARD_HEIGHT = { height: SCREEN_HEIGHT * 0.85 };
+    CARD_WIDTH = { width: SCREEN_WIDTH * 0.9 };
   } else {
-    CARD_HEIGHT = {height: SCREEN_HEIGHT * 0.35};
-    CARD_WIDTH = {width: SCREEN_WIDTH * 0.9};
+    CARD_HEIGHT = { height: SCREEN_HEIGHT * 0.35 };
+    CARD_WIDTH = { width: SCREEN_WIDTH * 0.9 };
   }
 
-  const HalfCard = () => {
+  const CardContent = () => {
     return (
       <View>
         <Animated.View
           style={[Styles.front, rStyle, cardStyle, CARD_WIDTH, CARD_HEIGHT]}>
-          <Text style={Styles.word}>{word}</Text>
+          <MyText content={word} fontWeight={500} fontSize={24} fontColor='white' />
+
         </Animated.View>
         <Animated.View
           style={[Styles.back, bStyle, cardStyle, CARD_WIDTH, CARD_HEIGHT]}>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View style={{flex: 2}}>
-              <Text numberOfLines={7} style={Styles.meaningHalf}>
-                {meaning}
-              </Text>
-            </View>
-            {imageUri ? (
-              <Image
-                style={{flex: 1, aspectRatio: aspectRatio}}
-                source={{uri: imageUri}}
-              />
-            ) : null}
-          </View>
+
+          {cardSize === 'Full' ? <FullCardContent /> : <HalfCardContent />}
+
         </Animated.View>
+      </View>
+    )
+  }
+
+  const HalfCardContent = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <View style={{ flex: 2 }}>
+          <MyText
+            fontWeight={400}
+            fontSize={18}
+            fontColor={'white'}
+            content={meaning}
+            numberOfLines={7}
+            style={{ textAlignVertical: 'center', flex: 1 }} />
+        </View>
+        {imageUri ? (
+          <Image
+            style={{ flex: 1, aspectRatio: aspectRatio }}
+            source={{ uri: imageUri }}
+          />
+        ) : null}
       </View>
     );
   };
 
-  const FullCard = () => {
+  const FullCardContent = () => {
     return (
-      <View>
-        <Animated.View
-          style={[Styles.front, rStyle, cardStyle, CARD_WIDTH, CARD_HEIGHT]}>
-          <Text style={Styles.word}>{word}</Text>
-        </Animated.View>
-        <Animated.View
-          style={[Styles.back, bStyle, cardStyle, CARD_WIDTH, CARD_HEIGHT]}>
-          <View style={{flex: 1}}>
-            {imageUri ? (
-              <Image
-                style={{
-                  flex: 1,
-                  aspectRatio: aspectRatio,
-                  marginBottom: 50,
-                  alignSelf: 'center',
-                }}
-                source={{uri: imageUri}}
-              />
-            ) : null}
-            <View style={{flex: 2}}>
-              <Text
-                onLongPress={() => setModalVisible(!modalVisible)}
-                onPress={() => (
-                  (spin.value = spin.value ? 0 : 1),
-                  setCardIsFlipped(!cardIsFlipped)
-                )}
-                disabled={!cardIsFlipped}
-                // minimumFontScale={0.75}
-                // adjustsFontSizeToFit={true}
-                numberOfLines={17}
-                style={Styles.meaningFull}>
-                {meaning}
-              </Text>
-            </View>
-          </View>
-        </Animated.View>
+      <View style={{ flex: 1 }}>
+        {imageUri ? (
+          <Image
+            style={{
+              flex: 1,
+              aspectRatio: aspectRatio,
+              marginBottom: 50,
+              alignSelf: 'center',
+            }}
+            source={{ uri: imageUri }}
+          />
+        ) : null}
+        <View style={{ flex: 2 }}>
+          <MyText
+            content={meaning}
+            numberOfLines={17}
+            onLongPress={() => setModalVisible(!modalVisible)}
+            onPress={() => (
+              (spin.value = spin.value ? 0 : 1),
+              setCardIsFlipped(!cardIsFlipped)
+            )}
+            disabled={!cardIsFlipped}
+            fontWeight={400}
+            fontSize={16}
+            fontColor='white'
+            style={{ textAlignVertical: 'center', flex: 1 }}
+          />
+        </View>
       </View>
     );
   };
@@ -119,19 +124,19 @@ const FlashCard = ({word, meaning, cardStyle, imageUri, cardSize}: any) => {
     const spinVal = interpolate(spin.value, [0, 1], [0, 180]);
     return cardSize === 'Full'
       ? {
-          transform: [
-            {
-              rotateY: withTiming(`${spinVal}deg`, {duration: 200}),
-            },
-          ],
-        }
+        transform: [
+          {
+            rotateY: withTiming(`${spinVal}deg`, { duration: 200 }),
+          },
+        ],
+      }
       : {
-          transform: [
-            {
-              rotateX: withTiming(`${spinVal}deg`, {duration: 200}),
-            },
-          ],
-        };
+        transform: [
+          {
+            rotateX: withTiming(`${spinVal}deg`, { duration: 200 }),
+          },
+        ],
+      };
   }, []);
 
   const bStyle = useAnimatedStyle(() => {
@@ -139,19 +144,19 @@ const FlashCard = ({word, meaning, cardStyle, imageUri, cardSize}: any) => {
 
     return cardSize === 'Full'
       ? {
-          transform: [
-            {
-              rotateY: withTiming(`${spinVal}deg`, {duration: 200}),
-            },
-          ],
-        }
+        transform: [
+          {
+            rotateY: withTiming(`${spinVal}deg`, { duration: 200 }),
+          },
+        ],
+      }
       : {
-          transform: [
-            {
-              rotateX: withTiming(`${spinVal}deg`, {duration: 200}),
-            },
-          ],
-        };
+        transform: [
+          {
+            rotateX: withTiming(`${spinVal}deg`, { duration: 200 }),
+          },
+        ],
+      };
   }, []);
 
   return (
@@ -159,7 +164,7 @@ const FlashCard = ({word, meaning, cardStyle, imageUri, cardSize}: any) => {
       onPress={() => (
         (spin.value = spin.value ? 0 : 1), setCardIsFlipped(!cardIsFlipped)
       )}>
-      {cardSize === 'Full' ? <FullCard /> : <HalfCard />}
+      <CardContent />
       <FullMeaningModal
         setModalVisible={setModalVisible}
         modalVisible={modalVisible}
