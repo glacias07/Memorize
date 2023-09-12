@@ -1,14 +1,13 @@
 //React-native
-import {View, Text} from 'react-native';
 import React from 'react';
 
 //Screens
-import HomeScreen from './HomeScreen';
-
-//Define
+import MainAppRoutes from '../routes/MainAppRoutes';
 
 const App = () => {
-  return <HomeScreen />;
+  return (
+      <MainAppRoutes/>
+  );
 };
 
 export default App;

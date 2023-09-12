@@ -1,4 +1,11 @@
-import {View, Text, ScrollView, FlatList, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 
 import FlashCard from '../components/FlashCard';
@@ -10,6 +17,8 @@ import Folder from '../db/FolderSchema';
 import Realm from 'realm';
 import {createRealmContext} from '@realm/react';
 import SetCard from '../components/SetCard';
+import MyText from '../components/MyText';
+import PlainButton from '../components/PlainButton';
 
 const realmConfig = {
   schema: [Folder],
@@ -18,7 +27,7 @@ const realmConfig = {
 const {RealmProvider, useRealm, useObject, useQuery} =
   createRealmContext(realmConfig);
 
-const HomeScreenContent = () => {
+const HomeScreenContent = ({navigation}) => {
   const realm = useRealm();
   // const folders = useQuery(Folder);
   const folders = [
@@ -55,9 +64,21 @@ const HomeScreenContent = () => {
           />
         )}
       /> */}
-      <View
-        style={{backgroundColor: '#0a092d', flex: 1}}>
-        <SetCard setName={'Set 31'} termCount={30} style={{margin: 10}}/>
+      <View style={{backgroundColor: '#0a092d', flex: 1}}>
+        <PlainButton
+          onPress={() => navigation.navigate('Folders')}
+          title={'Folders screen'}
+        />
+        <PlainButton
+          onPress={() =>
+            navigation.navigate('Folder Sets', {
+              foldername: 'Mine',
+              setcount: 32,
+            })}
+          title={'Sets screen'}
+        />
+        
+        {/* <SetCard setName={'Set 31'} termCount={30} style={{margin: 10}} /> */}
 
         {/* <FolderCard
           folderName={
@@ -107,7 +128,12 @@ const HomeScreenContent = () => {
       </View>
       {/* <AddButton
         style={{bottom: '2%', right: '5%'}}
-        onPressFunction={() => console.log('Set 2')}
+        onPressFunction={() =>
+          navigation.navigate('Folder Sets', {
+            foldername: 'Mine',
+            setcount: 32,
+          })
+        }
       /> */}
       {/* <AddButton
         style={{bottom: '2%', right: '5%'}}
@@ -117,10 +143,10 @@ const HomeScreenContent = () => {
   );
 };
 
-function HomeScreen() {
+function HomeScreen({navigation}) {
   return (
     <RealmProvider>
-      <HomeScreenContent />
+      <HomeScreenContent navigation={navigation} />
     </RealmProvider>
   );
 }

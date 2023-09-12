@@ -8,7 +8,7 @@ const SetCard = ({cardOnPress, setName, termCount, style}) => {
     <TouchableOpacity
       style={[Styles.containerStyle, style]}
       onPress={cardOnPress}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View>
           <MyText
             fontColor="white"
@@ -18,17 +18,17 @@ const SetCard = ({cardOnPress, setName, termCount, style}) => {
           />
           <MyText
             fontColor="#dadde7"
-            fontWeight={500}
+            fontWeight={700}
             fontSize={16}
             content={termCount + ' terms'}
           />
         </View>
         <Image
-          style={{height: 70, width: 70}}  
-          source={require('../assets/images/profilepic.jpg')} //ADD THUMBNAIl
-        /> 
+          style={{height: 60, width: 60}}
+          source={require('../assets/images/profilepic.jpg')} //ADD THUMBNAIL to schema
+        />
       </View>
-      <UsernameLabel style={Styles.usernameLabelStyle} />
+      <UsernameLabel size={-1} style={Styles.usernameLabelStyle} />
     </TouchableOpacity>
   );
 };
@@ -42,6 +42,6 @@ const Styles = {
     borderRadius: 10,
   },
   usernameLabelStyle: {
-    marginTop: 20,
+    marginTop: 15,
   },
 };
