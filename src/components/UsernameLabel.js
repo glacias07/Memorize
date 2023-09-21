@@ -3,10 +3,13 @@ import React from 'react';
 import MyText from './MyText';
 
 const UsernameLabel = ({username = 'Shriyans_Naik', size = 0, style}) => {
+  var usernameFontSize = 14;
+  var ppDimensions = 30;
   if (size != 0) {
-    usernameFontSize = 14 + size / 2;
-    ppDimensions = 30 + size;
+    usernameFontSize += size / 2;
+    ppDimensions += size;
   }
+
   return (
     <View style={[Styles.containerStyle, style]}>
       <Image

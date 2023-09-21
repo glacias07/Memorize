@@ -11,13 +11,22 @@ const DATA = [
   {name: 'GRE synonyms'},
 ];
 
-const FoldersScreen = () => {
+const FoldersScreen = ({navigation}) => {
   return (
     <FlatList
       style={{backgroundColor: '#0a092d'}}
       data={DATA}
       renderItem={item => (
-        <FolderCard style={{margin: 10}} folderName={item.item.name} />
+        <FolderCard
+          folderOnPress={() =>
+            navigation.navigate('Folder Sets', {
+              setcount: 10,
+              foldername: item.item.name,
+            })
+          }
+          style={{margin: 10}}
+          folderName={item.item.name}
+        />
       )}
     />
   );

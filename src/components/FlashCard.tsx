@@ -1,10 +1,4 @@
-import {
-  View,
-  StyleSheet,
-  Pressable,
-  Image,
-  Dimensions,
-} from 'react-native';
+import { View, StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import React, { useState } from 'react';
 
 import Animated, {
@@ -17,7 +11,14 @@ import Animated, {
 import FullMeaningModal from './FullMeaningModal';
 import MyText from './MyText';
 
-const FlashCard = ({ word, meaning, cardStyle, imageUri, cardSize }: any) => {
+const FlashCard = ({
+  word,
+  meaning,
+  style,
+  imageUri,
+  cardSize,
+  cardWidth,
+}: any) => {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const SCREEN_HEIGHT = Dimensions.get('window').height;
   const [aspectRatio, setAspectRatio] = useState(1);
@@ -28,32 +29,31 @@ const FlashCard = ({ word, meaning, cardStyle, imageUri, cardSize }: any) => {
   }
 
   var CARD_HEIGHT = { height: 0 };
-  var CARD_WIDTH = { width: 0 };
+  var CARD_WIDTH = { width: cardWidth !== undefined ? cardWidth : SCREEN_WIDTH * 0.9 };
   if (cardSize == 'Full') {
     CARD_HEIGHT = { height: SCREEN_HEIGHT * 0.85 };
-    CARD_WIDTH = { width: SCREEN_WIDTH * 0.9 };
   } else {
     CARD_HEIGHT = { height: SCREEN_HEIGHT * 0.35 };
-    CARD_WIDTH = { width: SCREEN_WIDTH * 0.9 };
   }
 
   const CardContent = () => {
     return (
-      <View>
+      <>
         <Animated.View
-          style={[Styles.front, rStyle, cardStyle, CARD_WIDTH, CARD_HEIGHT]}>
-          <MyText content={word} fontWeight={500} fontSize={24} fontColor='white' />
-
+          style={[Styles.front, rStyle, style, CARD_WIDTH, CARD_HEIGHT]}>
+          <MyText
+            content={word}
+            fontWeight={500}
+            fontSize={24}
+            fontColor="white"
+          />
         </Animated.View>
         <Animated.View
-          style={[Styles.back, bStyle, cardStyle, CARD_WIDTH, CARD_HEIGHT]}>
-
+          style={[Styles.back, bStyle, style, CARD_WIDTH, CARD_HEIGHT]}>
           {cardSize === 'Full' ? <FullCardContent /> : <HalfCardContent />}
-
-        </Animated.View>
-      </View>
-    )
-  }
+        </Animated.View></>
+    );
+  };
 
   const HalfCardContent = () => {
     return (
@@ -71,7 +71,8 @@ const FlashCard = ({ word, meaning, cardStyle, imageUri, cardSize }: any) => {
             fontColor={'white'}
             content={meaning}
             numberOfLines={7}
-            style={{ textAlignVertical: 'center', flex: 1 }} />
+            style={{ textAlignVertical: 'center', flex: 1 }}
+          />
         </View>
         {imageUri ? (
           <Image
@@ -109,7 +110,7 @@ const FlashCard = ({ word, meaning, cardStyle, imageUri, cardSize }: any) => {
             disabled={!cardIsFlipped}
             fontWeight={400}
             fontSize={16}
-            fontColor='white'
+            fontColor="white"
             style={{ textAlignVertical: 'center', flex: 1 }}
           />
         </View>
@@ -202,7 +203,7 @@ const Styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
     textAlignVertical: 'center',
-    flex: 1
+    flex: 1,
   },
   meaningHalf: {
     color: 'white',
