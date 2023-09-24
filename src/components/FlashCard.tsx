@@ -1,5 +1,12 @@
-import { View, StyleSheet, Pressable, Image, Dimensions } from 'react-native';
-import React, { useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useState} from 'react';
 
 import Animated, {
   interpolate,
@@ -16,24 +23,28 @@ const FlashCard = ({
   meaning,
   style,
   imageUri,
-  cardSize,
   cardWidth,
+  fullscreenOnPress,
+  cardSize='Half'
 }: any) => {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const SCREEN_HEIGHT = Dimensions.get('window').height;
   const [aspectRatio, setAspectRatio] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
+  
 
   {
     imageUri ? Image.getSize(imageUri, (w, h) => setAspectRatio(w / h)) : null;
   }
 
-  var CARD_HEIGHT = { height: 0 };
-  var CARD_WIDTH = { width: cardWidth !== undefined ? cardWidth : SCREEN_WIDTH * 0.9 };
+  var CARD_HEIGHT = {height: 0};
+  var CARD_WIDTH = {
+    width: cardWidth !== undefined ? cardWidth : SCREEN_WIDTH * 0.9,
+  };
   if (cardSize == 'Full') {
-    CARD_HEIGHT = { height: SCREEN_HEIGHT * 0.85 };
+    CARD_HEIGHT = {height: SCREEN_HEIGHT * 0.85};
   } else {
-    CARD_HEIGHT = { height: SCREEN_HEIGHT * 0.35 };
+    CARD_HEIGHT = {height: SCREEN_HEIGHT * 0.35};
   }
 
   const CardContent = () => {
@@ -47,11 +58,23 @@ const FlashCard = ({
             fontSize={24}
             fontColor="white"
           />
+          {cardSize === 'Half' ? (
+            <TouchableOpacity
+              onPress={fullscreenOnPress}
+              style={{position: 'absolute', bottom: 10, right: 10, zIndex: 2}}>
+              <Image
+                tintColor={'white'}
+                style={{height: '100%', aspectRatio: 1}}
+                source={require('../assets/images/fullscreen.png')}
+              />
+            </TouchableOpacity>
+          ) : null}
         </Animated.View>
         <Animated.View
           style={[Styles.back, bStyle, style, CARD_WIDTH, CARD_HEIGHT]}>
           {cardSize === 'Full' ? <FullCardContent /> : <HalfCardContent />}
-        </Animated.View></>
+        </Animated.View>
+      </>
     );
   };
 
@@ -64,20 +87,20 @@ const FlashCard = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <View style={{ flex: 2 }}>
+        <View style={{flex: 2}}>
           <MyText
             fontWeight={400}
             fontSize={18}
             fontColor={'white'}
             content={meaning}
             numberOfLines={7}
-            style={{ textAlignVertical: 'center', flex: 1 }}
+            style={{textAlignVertical: 'center', flex: 1}}
           />
         </View>
         {imageUri ? (
           <Image
-            style={{ flex: 1, aspectRatio: aspectRatio }}
-            source={{ uri: imageUri }}
+            style={{flex: 1, aspectRatio: aspectRatio}}
+            source={{uri: imageUri}}
           />
         ) : null}
       </View>
@@ -86,7 +109,7 @@ const FlashCard = ({
 
   const FullCardContent = () => {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         {imageUri ? (
           <Image
             style={{
@@ -95,10 +118,10 @@ const FlashCard = ({
               marginBottom: 50,
               alignSelf: 'center',
             }}
-            source={{ uri: imageUri }}
+            source={{uri: imageUri}}
           />
         ) : null}
-        <View style={{ flex: 2 }}>
+        <View style={{flex: 2}}>
           <MyText
             content={meaning}
             numberOfLines={17}
@@ -111,7 +134,7 @@ const FlashCard = ({
             fontWeight={400}
             fontSize={16}
             fontColor="white"
-            style={{ textAlignVertical: 'center', flex: 1 }}
+            style={{textAlignVertical: 'center', flex: 1}}
           />
         </View>
       </View>
@@ -125,19 +148,19 @@ const FlashCard = ({
     const spinVal = interpolate(spin.value, [0, 1], [0, 180]);
     return cardSize === 'Full'
       ? {
-        transform: [
-          {
-            rotateY: withTiming(`${spinVal}deg`, { duration: 200 }),
-          },
-        ],
-      }
+          transform: [
+            {
+              rotateY: withTiming(`${spinVal}deg`, {duration: 200}),
+            },
+          ],
+        }
       : {
-        transform: [
-          {
-            rotateX: withTiming(`${spinVal}deg`, { duration: 200 }),
-          },
-        ],
-      };
+          transform: [
+            {
+              rotateX: withTiming(`${spinVal}deg`, {duration: 200}),
+            },
+          ],
+        };
   }, []);
 
   const bStyle = useAnimatedStyle(() => {
@@ -145,19 +168,19 @@ const FlashCard = ({
 
     return cardSize === 'Full'
       ? {
-        transform: [
-          {
-            rotateY: withTiming(`${spinVal}deg`, { duration: 200 }),
-          },
-        ],
-      }
+          transform: [
+            {
+              rotateY: withTiming(`${spinVal}deg`, {duration: 200}),
+            },
+          ],
+        }
       : {
-        transform: [
-          {
-            rotateX: withTiming(`${spinVal}deg`, { duration: 200 }),
-          },
-        ],
-      };
+          transform: [
+            {
+              rotateX: withTiming(`${spinVal}deg`, {duration: 200}),
+            },
+          ],
+        };
   }, []);
 
   return (
@@ -179,6 +202,7 @@ export default FlashCard;
 
 const Styles = StyleSheet.create({
   front: {
+    zIndex: 1,
     backgroundColor: '#2e3856',
     borderRadius: 10,
     position: 'absolute',

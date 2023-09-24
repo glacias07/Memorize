@@ -26,21 +26,12 @@ const DATA = [
   {term: '5', meaning: 'Having a cold sensation'},
   {term: '6', meaning: 'A month of summer'},
 ];
-const LearnFlashcardsScreen = () => {
+const LearnFlashcardsScreen = ({navigation}) => {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const CARD_WIDTH = SCREEN_WIDTH * 0.9;
   const SPACING = 20;
   const [activeIndexNumber, setActiveIndexNumber] = useState(Number); //this state will hold our active index
 
-  const progress = useRef(new Animated.Value(0)).current;
-  const scale = useRef(new Animated.Value(1)).current;
-  const downscale = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    Animated.spring(progress, {toValue: 1, useNativeDriver: false}).start();
-    Animated.spring(scale, {toValue: 2, useNativeDriver: false}).start();
-    Animated.spring(downscale, {toValue: 0, useNativeDriver: false}).start();
-  }, [activeIndexNumber]);
 
   return (
     <View style={{alignItems: 'center'}}>
@@ -53,6 +44,9 @@ const LearnFlashcardsScreen = () => {
               meaning={item.item.meaning}
               style={{margin: SPACING}}
               cardWidth={CARD_WIDTH}
+              fullscreenOnPress={() =>
+                navigation.navigate('Learn Flashcards Fullscreen')
+              }
             />
           </>
         )}
@@ -83,7 +77,6 @@ const LearnFlashcardsScreen = () => {
                   ? 0
                   : Math.abs(activeIndexNumber - index) * 3
               }
-              style={{}}
             />
           ) : null;
         })}

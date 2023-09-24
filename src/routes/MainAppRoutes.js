@@ -6,6 +6,7 @@ import FoldersScreen from '../screens/FoldersScreen';
 import FolderSetScreen from '../screens/FolderSetScreen';
 import HomeStackRoutes from './HomeStackRoutes';
 import LearnFlashcardsScreen from '../screens/LearnFlashcardsScreen';
+import LearnFlashcardsFullscreen from '../screens/LearnFlashcardsFullscreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +60,24 @@ export default function MainAppRoutes() {
             },
             headerTintColor: 'white',
           }}
+        />
+        <Stack.Screen
+          name={'Learn Flashcards Fullscreen'}
+          component={LearnFlashcardsFullscreen}
+          options={{
+            title: 'Folder',
+            headerTitleStyle: {
+              fontFamily: 'trakya-sans-700',
+              fontSize: 20,
+              color: 'white',
+            },
+            headerStyle: {
+              backgroundColor: '#303854',
+            },
+            headerTintColor: 'white',
+            headerShown: false
+          }}
+          
         />
       </Stack.Navigator>
     </NavigationContainer>
