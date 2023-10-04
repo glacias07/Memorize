@@ -1,3 +1,31 @@
+# WordWise: Your Ultimate Vocabulary Enhancement App
+![image](https://github.com/shriyansnaik/WordWise/assets/66057990/0ebad5ba-59b6-4bcb-8680-ef5336f7016d)
+
+WordWise is your go-to app for supercharging your vocabulary. Dive into a world of words with features designed to help you learn and retain new terms effortlessly.
+
+**Key Features:**
+
+- **Word Search:** Search for words and their meanings with ease.  
+
+- **Offline Meaning Saving:** Save word meanings offline through intelligent web scraping for quick reference anytime, anywhere.  
+
+- **Flashcard Creation:** Create personalized flashcards based on word meanings to reinforce your learning.  
+
+- **Organize into Sets:** Group flashcards into sets to categorize and focus your studies.  
+
+- **Sets Organize into Folders:** Further organize your sets into folders for efficient vocabulary management.  
+
+- **Vocabulary Improvement:** Use WordWise to enhance your word knowledge and communication skills.  
+
+  ...and many more.
+
+![image](https://github.com/shriyansnaik/WordWise/assets/66057990/76bd853e-634a-430b-96be-fec892f01927)
+
+  
+Unlock the power of words and elevate your language proficiency with WordWise. It's more than just a vocabulary app; it's your key to effective learning.  
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
